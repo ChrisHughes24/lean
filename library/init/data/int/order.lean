@@ -187,7 +187,7 @@ simp [int.lt_iff_le_and_ne], split; intro h,
 end
 
 instance : decidable_linear_ordered_comm_ring int :=
-{ mul_one         := mul_one,
+{ one_mul         := one_mul,
   right_distrib   := right_distrib,
   add_comm        := add_comm,
   le              := int.le,

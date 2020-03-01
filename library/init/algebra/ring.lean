@@ -80,12 +80,12 @@ end semiring
 
 class comm_semiring (α : Type u) extends add_comm_monoid α, comm_monoid α :=
 (left_distrib : ∀ a b c : α, a * (b + c) = (a * b) + (a * c))
-(zero_mul : ∀ a : α, 0 * a = 0)
+(mul_zero : ∀ a : α, a * 0 = 0)
 
 instance comm_semiring.to_semiring (α : Type u) [I : comm_semiring α] : semiring α :=
 { right_distrib := λ a b c, by rw [mul_comm, comm_semiring.left_distrib, mul_comm c, mul_comm c]; refl,
   mul_one := mul_one,
-  mul_zero := λ a, by rw [mul_comm, comm_semiring.zero_mul]; refl,
+  zero_mul := λ a, by rw [mul_comm, comm_semiring.mul_zero]; refl,
   ..I }
 
 section comm_semiring
@@ -245,7 +245,7 @@ instance comm_ring.to_ring (α : Type u) [s : comm_ring α] : ring α :=
   ..s }
 
 instance comm_ring.to_comm_semiring [s : comm_ring α] : comm_semiring α :=
-{ zero_mul := zero_mul, add_comm := ring.add_comm, ..s }
+{ mul_zero := mul_zero, add_comm := ring.add_comm, ..s }
 
 section comm_ring
   variable [comm_ring α]
